@@ -5,9 +5,10 @@ sys.path.insert(0, os.path.dirname(__file__))
 from listener import listen
 from speaker import speak
 from commands import execute
+from config import GREETING
 
 def run_assistant():
-    speak("Assistant started")
+    speak(GREETING)
     while True:
         command=listen()
         if command:

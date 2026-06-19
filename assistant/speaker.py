@@ -1,9 +1,14 @@
 import pyttsx3
+from config import VOICE_RATE
 
-def speak(message):
-    print(f"Assistant: {message}")
+def speak(text):
+    print(f"Assistant: {text}")
     engine = pyttsx3.init()
-    engine.setProperty("rate", 180)
-    engine.say(message)
+    engine.setProperty("rate", VOICE_RATE)
+    print(
+        f"Nova: {text}"
+    )
+
+    engine.say(text)
     engine.runAndWait()
     engine.stop()
