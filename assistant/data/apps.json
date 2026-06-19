@@ -1,0 +1,13 @@
+{
+    "chrome":
+    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+
+    "calculator":
+    "calc.exe",
+
+    "notepad":
+    "notepad.exe",
+
+    "vscode":
+    "C:\\Users\\thabo\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+}
