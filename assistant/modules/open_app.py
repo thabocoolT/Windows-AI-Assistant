@@ -1,6 +1,6 @@
 import subprocess
 
-def open_appliaction(app):
+def open_application(app):
     apps={
         "chrome":
         r"C:\Program Files\Google\Chrome\Application\chrome.exe"
