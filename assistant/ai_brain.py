@@ -1,98 +1,69 @@
 import os
 import json
+import re
 
 from groq import Groq
 from dotenv import load_dotenv
 
+from memory import get_memory
 
 load_dotenv()
 
 client = Groq(
-    api_key=os.getenv(
-        "GROQ_API_KEY"
-    )
+    api_key=os.getenv("GROQ_API_KEY")
 )
-
 
 def get_intent(command):
 
-    response = (
-        client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+    messages = [
+        {
+            "role": "system",
+            "content": """
+You are Nova, a Windows assistant.
 
-            messages=[
+Return ONE JSON object ONLY. Never return multiple JSON objects.
 
-                {
-                    "role": "system",
+Two modes:
 
-                    "content": """
-You classify Windows assistant commands.
-
-Return JSON only.
-
-Format:
-
+1. ACTION MODE:
 {
- "intent":"greeting|time|open_app|exit|unknown",
- "value":null
+ "type":"action",
+ "intent":"open_app|time|exit|greeting|unknown",
+ "value":"..."
 }
 
-Examples:
+2. CHAT MODE:
+{
+ "type":"chat",
+ "response":"natural reply"
+}
 
-hello
-→
-{"intent":"greeting","value":null}
-
-what time is it
-→
-{"intent":"time","value":null}
-
-open chrome
-→
-{"intent":"open_app","value":"chrome"}
-
-exit
-→
-{"intent":"exit","value":null}
-
-goodbye
-→
-{"intent":"exit","value":null}
-
-quit
-→
-{"intent":"exit","value":null}
+Rules:
+- If user requests system task → action
+- If general question → chat
+- Always return ONE JSON object only
 """
-                },
+        }
+    ]
 
-                {
-                    "role": "user",
-                    "content": command
-                }
+    messages.extend(get_memory())
 
-            ]
-        )
+    messages.append({
+        "role": "user",
+        "content": command
+    })
+
+    response = client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+        messages=messages
     )
 
-    output = (
-        response
-        .choices[0]
-        .message
-        .content
-        .strip()
-    )
+    output = response.choices[0].message.content.strip()
+    output = output.replace("```json", "").replace("```", "").strip()
 
-    output = (
-        output
-        .replace(
-            "```json",
-            ""
-        )
-        .replace(
-            "```",
-            ""
-        )
-        .strip()
-    )
+    # Extract only the first JSON object
+    match = re.search(r'\{.*?\}', output, re.DOTALL)
+    if match:
+        return json.loads(match.group())
 
-    return json.loads(output)
+    return {"type": "action", "intent": "unknown", "value": None}
