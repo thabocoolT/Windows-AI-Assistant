@@ -1,4 +1,5 @@
 import pyttsx3
+import time
 from config import VOICE_RATE
 
 def speak(text):
@@ -12,3 +13,4 @@ def speak(text):
     engine.say(text)
     engine.runAndWait()
     engine.stop()
+    time.sleep(0.5)

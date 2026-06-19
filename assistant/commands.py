@@ -1,38 +1,108 @@
-from speaker import speak
-from modules.open_app import open_application
-from config import ASSISTANT_NAME
 from datetime import datetime
 
+from speaker import speak
+from ai_brain import get_intent
+from modules.open_app import open_application
+
+
 def execute(command):
-    command=command.lower()
 
-    if "hello" in command:
-        speak("Hello. How can I assist you?")
+    try:
 
-    elif "how are you" in command:
-        speak("I am functioning properly.")
+        data = get_intent(command)
+        print(data)
 
-    elif(
-        "your name" in command or
-        "who are you" in command
-    ):
-        speak(f"My name is {ASSISTANT_NAME}.")
+        print("AI OUTPUT:", data)
 
-    elif "open" in command:
-        app=(command .replace("open", "")).strip()
+        intent = (
+            data.get(
+                "intent",
+                "unknown"
+            )
+            .lower()
+        )
 
-        opened=(open_application(app))
+        value = (
+            data.get(
+                "value"
+            )
+        )
 
-        if opened:
-            speak(f"Opening {app}.")
+    except Exception as e:
+
+        print(
+            "AI ERROR:",
+            e
+        )
+
+        speak(
+            "AI processing failed"
+        )
+
+        return False
+
+
+    if intent == "greeting":
+
+        speak(
+            "Hello, how can I help you?"
+        )
+
+        return False
+
+
+    elif intent == "time":
+
+        current = (
+            datetime.now()
+            .strftime(
+                "%H:%M"
+            )
+        )
+
+        speak(
+            f"It is {current}"
+        )
+
+        return False
+
+
+    elif intent == "open_app":
+
+        success = (
+            open_application(
+                value
+            )
+        )
+
+        if success:
+
+            speak(
+                f"Opening {value}"
+            )
+
         else:
-            speak("I couldn't find that application.")
 
-    elif "exit" in command:
-        speak("Goodbye.")
-        exit()
+            speak(
+                "I could not find that application"
+            )
+
+        return False
+
+
+    elif intent == "exit":
+
+        speak(
+            "Goodbye"
+        )
+
+        return True
+
 
     else:
+
         speak(
-            "I did not understand that command."
+            "I did not understand that command"
         )
+
+        return False
