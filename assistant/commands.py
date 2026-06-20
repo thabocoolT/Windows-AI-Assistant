@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from modules.file_reader import read_file
 from speaker import speak
 from ai_brain import get_intent
 from modules.open_app import open_application
@@ -126,6 +127,12 @@ def execute(command):
             reply="Please say a number between 0 and 100"
         speak(reply)
         add_memory("assistant",reply)
+
+    elif intent == "read_file":
+        if value:
+            read_file(value)
+        else:
+            speak("Please tell me the file name to read")
 
     else:
         reply = "I did not understand that command"

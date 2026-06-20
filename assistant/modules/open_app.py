@@ -28,22 +28,22 @@ def open_application(app):
         except Exception as e:
             print(f"Error opening {app}: {e}")
             return False
-        
-        #Auto search common install locations
-        search=paths=[
-            f"C:\\Program Files\\**\\{app}.exe",
-            f"C:\\Program Files (x86)\\**\\{app}.exe",
-            f"C:\\Users\\thabo\\AppData\\Roaming\\**\\{app}.exe",
-            f"C:\\Users\\thabo\\AppData\\Local\\**\\{app}.exe",
-        ]
+    
+    #Auto search common install locations
+    search_paths=[
+        f"C:\\Program Files\\**\\{app}.exe",
+        f"C:\\Program Files (x86)\\**\\{app}.exe",
+        f"C:\\Users\\thabo\\AppData\\Roaming\\**\\{app}.exe",
+        f"C:\\Users\\thabo\\AppData\\Local\\**\\{app}.exe",
+    ]
 
-        for pattern in search_paths:
-            results=glob.glob(pattern,recursive=True)
-            if resullts:
-                try:
-                    subprocess.Popen(result[0])
-                    return True
-                except Exception as e:
-                    print(f"Error opening {app}: {e}")
-                    return False
+    for pattern in search_paths:
+        results=glob.glob(pattern,recursive=True)
+        if results:
+            try:
+                subprocess.Popen(results[0])
+                return True
+            except Exception as e:
+                print(f"Error opening {app}: {e}")
+                return False
     return False

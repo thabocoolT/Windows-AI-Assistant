@@ -31,8 +31,9 @@ Two modes:
 1. ACTION MODE:
 {
  "type":"action",
- "intent":"open_app|time|exit|greeting|volume_up|volume_down|set_volume|mute|screenshot|search|search_youtube|shutdown|restart|lock|unknown",
- "value":"..."
+ "intent":"open_app|time|exit|greeting|volume_up|volume_down|set_volume|mute|screenshot|search|search_youtube|shutdown|restart|loc|read_file|
+ unknown",
+ "value":"extracted value or null"
  
 }
 
@@ -59,6 +60,8 @@ Rules:
 - general questions → chat
 - set volume to 50 → set_volume, value=50
 - set volume to 80 → set_volume, value=80
+- read file [filename] → read_file, value=filename
+- read [any file] / read file [name] / open and read [name] → read_file, value=filename with extension
 - Always return ONE JSON object only
 """
         }
