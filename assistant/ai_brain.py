@@ -4,6 +4,7 @@ import re
 
 from groq import Groq
 from dotenv import load_dotenv
+from config import DEVELOPER
 
 from memory import get_memory
 
@@ -19,7 +20,9 @@ def get_intent(command):
         {
             "role": "system",
             "content": """
-You are Nova, a Windows assistant.
+You are Nova, a Windows assistant created by {DEVELOPER['name']} (also known as {DEVELOPER['nickname']}) 
+He is a final year BSc IT student at North West University.
+You were developed in {DEVELOPER['created']}.
 
 Return ONE JSON object ONLY. Never return multiple JSON objects.
 
@@ -41,6 +44,7 @@ Two modes:
 Rules:
 - If user requests system task → action
 - If general question → chat
+- If asked about your developer, Cool Tee, or Prince → chat, answer from the info above
 - Always return ONE JSON object only
 """
         }
@@ -62,8 +66,13 @@ Rules:
     output = output.replace("```json", "").replace("```", "").strip()
 
     # Extract only the first JSON object
-    match = re.search(r'\{.*?\}', output, re.DOTALL)
-    if match:
-        return json.loads(match.group())
+   
+    start = output.find("{")
+    end = output.rfind("}") + 1
+    if start != -1 and end > start:
+        try:
+            return json.loads(output[start:end])
+        except json.JSONDecodeError:
+            pass
 
     return {"type": "action", "intent": "unknown", "value": None}
