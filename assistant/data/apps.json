@@ -2,12 +2,22 @@
     "chrome":
     "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
 
-    "calculator":
-    "calc.exe",
-
-    "notepad":
-    "notepad.exe",
-
-    "vscode":
-    "C:\\Users\\thabo\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+   "edge": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "vlc": "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe",
+    "word": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+    "excel": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
+    "explorer": "C:\\Windows\\explorer.exe",
+    "vscode": "C:\\Users\\thabo\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+    "vs": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\devenv.exe",
+    "visual studio": "C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\IDE\\devenv.exe",
+    "github desktop": "C:\\Users\\thabo\\AppData\\Local\\GitHubDesktop\\GitHubDesktop.exe",
+    "github": "C:\\Users\\thabo\\AppData\\Local\\GitHubDesktop\\GitHubDesktop.exe",
+    "settings": "ms-settings:",
+    "whatsapp": "C:\\Program Files\\WindowsApps\\5319275A.WhatsAppDesktop_2.2623.103.0_x64__cv1g1gvanyjgm\\WhatsApp.exe",
+    "outlook": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE",
+    "notepad": "C:\\Windows\\System32\\notepad.exe",
+    "calculator": "C:\\Windows\\System32\\calc.exe",
+    "paint": "C:\\Windows\\System32\\mspaint.exe",
+    "cmd": "C:\\Windows\\System32\\cmd.exe",
+    "task manager": "C:\\Windows\\System32\\Taskmgr.exe"
 }

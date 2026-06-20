@@ -31,7 +31,7 @@ Two modes:
 1. ACTION MODE:
 {
  "type":"action",
- "intent":"open_app|time|exit|greeting|volume_up|volume_down|mute|screenshot|search|lock|unknown",
+ "intent":"open_app|time|exit|greeting|volume_up|volume_down|set_volume|mute|screenshot|search|search_youtube|shutdown|restart|lock|unknown",
  "value":"..."
  
 }
@@ -57,6 +57,8 @@ Rules:
 - shutdown/turn off computer → shutdown
 - restart computer → restart
 - general questions → chat
+- set volume to 50 → set_volume, value=50
+- set volume to 80 → set_volume, value=80
 - Always return ONE JSON object only
 """
         }
