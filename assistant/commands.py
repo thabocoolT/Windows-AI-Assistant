@@ -4,6 +4,8 @@ from speaker import speak
 from ai_brain import get_intent
 from modules.open_app import open_application
 from memory import add_memory
+from modules.system_control import*
+from modules.search import search_google
 
 EXIT_COMMANDS = ["exit", "quit", "goodbye", "stop"]
 
@@ -51,6 +53,51 @@ def execute(command):
             reply = "I could not find that application"
         speak(reply)                    # ← was missing speak()
         add_memory("assistant", reply)
+
+    elif intent=="volume_up":
+        volume_up()
+        speak(
+            "Volume increased"
+        )
+
+    elif intent=="volume_down":
+        volume_down()
+
+        speak(
+            "Volume decreased"
+        )
+
+    elif intent=="mute":
+        mute()
+        speak(
+            "Muted"
+        )
+
+    elif intent=="screenshot":
+        success = screenshot()
+        if success:
+            speak(
+                "Screenshot saved"
+            )
+        else:
+            speak(
+                "Screenshot failed"
+            )
+
+    elif intent=="search":
+        search_google(
+            value
+        )
+        speak(
+            f"Searching{value}"
+        )
+
+    elif intent=="lock":
+        speak(
+            "Locking computer"
+        )
+        lock_pc()
+
 
     else:
         reply = "I did not understand"
