@@ -70,7 +70,19 @@ class NovaGUI(QWidget):
         self.text_label.setText(text)
 
     def set_status(self, status):
+        colors={
+            "Sleeping...": "#777777",
+            "Listening...": "#00BFFF",
+            "Thinking...":"#FFD700",
+            "Speaking...":"#00ff99",
+            "Shutting...":"#FF4444"
+
+        }
+        color=colors.get(status,"#ffffff")
         self.status_label.setText(status)
+        self.status_label.setStyleSheet(
+            f"color:{color}; font-size:11pt;"
+        )
 
     def mousePressEvent(self, event):
         self.drag_pos = event.globalPosition().toPoint()

@@ -5,6 +5,8 @@ os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "0"
 import time
 import sys
 import threading
+from speaker import set_gui
+
 from PySide6.QtWidgets import QApplication
 from listener import listen
 from speaker import speak
@@ -15,6 +17,7 @@ from gui import NovaGUI
 app = QApplication(sys.argv)
 window = NovaGUI()
 window.show()
+set_gui(window)
 
 def run_assistant():
     speak("Nova online")
