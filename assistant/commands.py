@@ -16,6 +16,7 @@ from modules.system_control import (
 )
 from modules.search import search_google, open_youtube
 from memory import add_memory
+from persistent_memory import get_user_name, get_nickname
 
 EXIT_COMMANDS = ["exit", "quit", "goodbye", "stop"]
 

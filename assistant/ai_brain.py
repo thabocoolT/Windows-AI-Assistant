@@ -1,6 +1,7 @@
 import os
 import json
 import re
+from persistent_memory import get_user_name, get_nickname
 
 from groq import Groq
 from dotenv import load_dotenv
@@ -23,6 +24,10 @@ def get_intent(command):
 You are Nova, a Windows assistant created by {DEVELOPER['name']} (also known as {DEVELOPER['nickname']}).
 He is a final year BSc IT student at North West University.
 You were developed in {DEVELOPER['created']}.
+You are currently talking to {get_user_name()}, also known as {get_nickname()}.
+Address the user by name occasionally to make the conversation feel personal.
+...rest of prompt stays the same...
+
 
 Return ONE JSON object ONLY. Never return multiple JSON objects.
 
