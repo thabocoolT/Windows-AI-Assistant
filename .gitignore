@@ -1,1 +1,18 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environment variables (keep your API key safe!)
 .env
+
+# VS Code
+.vscode/
+
+# OS files
+Thumbs.db
+desktop.ini
